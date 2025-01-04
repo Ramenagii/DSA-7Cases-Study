@@ -10,10 +10,24 @@
     <link href="https://fonts.googleapis.com/css2?family=Puppet+Snowman&display=swap" rel="stylesheet" />
     <!-- Styles -->
     <style>
-      body {
+      /* Reset margins and padding for the entire page */
+      html, body {
         margin: 0;
+        padding: 0;
+        height: 100%;
+        overflow: hidden; /* Remove the scrollbar */
+      }
+
+      /* Apply background color and font globally */
+      body {
         font-family: 'Puppet Snowman', cursive;
         background-color: #f7f7f7;
+      }
+
+      /* Ensure root element takes full screen */
+      #root {
+        width: 100%;
+        height: 100%;
       }
     </style>
   </head>

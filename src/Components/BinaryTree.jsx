@@ -1,169 +1,112 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from 'react';
+import * as d3 from 'd3';
 
-const BinaryTreeWithCanvas = () => {
-  const [level, setLevel] = useState(3); // Default level is 3
-  const [traversal, setTraversal] = useState([]);
-  const [currentNodeIndex, setCurrentNodeIndex] = useState(0);
-
-  const canvasRef = useRef(null);
-  const animationRef = useRef(null); // To hold the animation frame request ID
-
-  // Generate tree nodes based on the selected level
-  const generateTree = (level) => {
-    const nodes = [];
-    const totalNodes = Math.pow(2, level) - 1;
-    for (let i = 0; i < totalNodes; i++) {
-      nodes.push(i + 1);
-    }
-    return nodes;
-  };
-
-  const tree = generateTree(level);
-
-  // Traversal functions
-  const inOrderTraversal = (node, nodes) => {
-    if (node >= nodes.length) return [];
-    const left = inOrderTraversal(2 * node + 1, nodes);
-    const right = inOrderTraversal(2 * node + 2, nodes);
-    return [...left, nodes[node], ...right];
-  };
-
-  const preOrderTraversal = (node, nodes) => {
-    if (node >= nodes.length) return [];
-    const left = preOrderTraversal(2 * node + 1, nodes);
-    const right = preOrderTraversal(2 * node + 2, nodes);
-    return [nodes[node], ...left, ...right];
-  };
-
-  const postOrderTraversal = (node, nodes) => {
-    if (node >= nodes.length) return [];
-    const left = postOrderTraversal(2 * node + 1, nodes);
-    const right = postOrderTraversal(2 * node + 2, nodes);
-    return [...left, ...right, nodes[node]];
-  };
-
-  const startTraversal = (type) => {
-    let order = [];
-    switch (type) {
-      case "inOrder":
-        order = inOrderTraversal(0, tree);
-        break;
-      case "preOrder":
-        order = preOrderTraversal(0, tree);
-        break;
-      case "postOrder":
-        order = postOrderTraversal(0, tree);
-        break;
-      default:
-        break;
-    }
-    setTraversal(order);
-    setCurrentNodeIndex(0);
-  };
-
-  const drawTree = (ctx, currentNodeIndex) => {
-    ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height); // Clear the canvas before drawing
-
-    const nodes = generateTree(level);
-
-    const drawNode = (x, y, nodeValue) => {
-      ctx.beginPath();
-      ctx.arc(x, y, 20, 0, Math.PI * 2);
-      ctx.fillStyle = currentNodeIndex === nodeValue ? "yellow" : "skyblue";
-      ctx.fill();
-      ctx.stroke();
-      ctx.fillStyle = "black";
-      ctx.fillText(nodeValue, x - 8, y + 5);
-    };
-
-    const drawNodeRecursively = (nodeIndex, x, y, offset) => {
-      if (nodeIndex >= nodes.length) return;
-
-      const nodeValue = nodes[nodeIndex];
-
-      // Draw the current node
-      drawNode(x, y, nodeValue);
-
-      // Recursively draw left and right children with branches
-      const leftChildIndex = 2 * nodeIndex + 1;
-      const rightChildIndex = 2 * nodeIndex + 2;
-      const newOffset = offset / 2;
-
-      // Left branch
-      if (leftChildIndex < nodes.length) {
-        ctx.beginPath();
-        ctx.moveTo(x, y);  // Move from the current node
-        ctx.lineTo(x - newOffset, y + 50); // Line to the left child
-        ctx.stroke();
-        drawNodeRecursively(leftChildIndex, x - newOffset, y + 50, newOffset);
-      }
-
-      // Right branch
-      if (rightChildIndex < nodes.length) {
-        ctx.beginPath();
-        ctx.moveTo(x, y);  // Move from the current node
-        ctx.lineTo(x + newOffset, y + 50); // Line to the right child
-        ctx.stroke();
-        drawNodeRecursively(rightChildIndex, x + newOffset, y + 50, newOffset);
-      }
-    };
-
-    // Initial drawing of the tree
-    drawNodeRecursively(0, ctx.canvas.width / 2, 50, 100);
-  };
+const BinaryTree = () => {
+  const svgRef = useRef();
+  const [levels, setLevels] = useState(3);
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    const ctx = canvas.getContext("2d");
-
-    // Draw tree on initial load
-    drawTree(ctx, currentNodeIndex);
-
-    const animateTraversal = () => {
-      if (currentNodeIndex < traversal.length) {
-        setCurrentNodeIndex((prevIndex) => {
-          const nextIndex = prevIndex + 1;
-          if (nextIndex < traversal.length) {
-            return nextIndex;
-          } else {
-            cancelAnimationFrame(animationRef.current); // Stop the animation when done
-            return prevIndex;
-          }
-        });
-        drawTree(ctx, currentNodeIndex); // Redraw tree with updated node highlight
-        animationRef.current = requestAnimationFrame(animateTraversal); // Continue animation
-      }
+    const generateData = (level, value = 1) => {
+      if (level > levels || level > 5) return null;
+      return {
+        name: value.toString(),
+        children: [
+          generateData(level + 1, value * 2),
+          generateData(level + 1, value * 2 + 1),
+        ].filter(child => child !== null),
+      };
     };
 
-    if (traversal.length > 0) {
-      animationRef.current = requestAnimationFrame(animateTraversal); // Start animation
-    }
+    const data = generateData(1);
 
-    return () => cancelAnimationFrame(animationRef.current); // Cleanup animation on unmount
-  }, [traversal, currentNodeIndex]);
+    const width = window.innerWidth;
+    const height = window.innerHeight;
+    const margin = { top: 50, right: 50, bottom: 50, left: 50 };
+
+    const svg = d3
+      .select(svgRef.current)
+      .attr('width', width)
+      .attr('height', height);
+
+    svg.selectAll('*').remove(); // Clear previous drawings
+
+    const g = svg.append('g').attr('transform', `translate(${margin.left}, ${margin.top})`);
+
+    const treeLayout = d3.tree().size([width - margin.left - margin.right, height - margin.top - margin.bottom]);
+    const root = d3.hierarchy(data);
+    treeLayout(root);
+
+    const linkGenerator = d3.linkVertical()
+      .x(d => d.x)
+      .y(d => d.y);
+
+    const link = g.selectAll('.link')
+      .data(root.links())
+      .enter()
+      .append('path')
+      .attr('class', 'link')
+      .attr('d', linkGenerator)
+      .attr('stroke', '#000000')
+      .attr('fill', 'none')
+      .attr('stroke-dasharray', '0, 1') // Start with invisible lines
+      .style('opacity', 0) // Start with hidden links
+      .transition() // Animate link appearance
+      .duration(500) // Faster animation
+      .style('opacity', 1)
+      .attr('stroke-dasharray', '4, 4'); // Animate link drawing effect
+
+    const node = g.selectAll('.node')
+      .data(root.descendants())
+      .enter()
+      .append('circle')
+      .attr('class', 'node')
+      .attr('cx', d => d.x)
+      .attr('cy', d => d.y)
+      .attr('r', 20)
+      .attr('fill', '#FFFFFF')
+      .attr('stroke', '#000000')
+      .style('filter', 'drop-shadow(5px 5px 8px rgba(0, 0, 0, 0.7))') // Darker shadow
+      .style('opacity', 0) // Start with hidden nodes
+      .transition() // Animate node appearance
+      .duration(500) // Faster animation
+      .delay(d => d.depth * 500) // Delay per level for level-by-level animation
+      .style('opacity', 1);
+
+    g.selectAll('.label')
+      .data(root.descendants())
+      .enter()
+      .append('text')
+      .attr('class', 'label')
+      .attr('x', d => d.x)
+      .attr('y', d => d.y + 5) // Adjust the Y position for better alignment
+      .attr('text-anchor', 'middle')
+      .attr('font-size', '12px')
+      .attr('fill', '#000')
+      .style('opacity', 0) // Start with hidden text
+      .transition() // Animate text appearance
+      .duration(500) // Faster animation
+      .delay(d => d.depth * 500) // Delay per level for level-by-level animation
+      .style('opacity', 1)
+      .text(d => d.data.name); // Display the value inside the node
+  }, [levels]);
 
   return (
-    <div>
-      <div>
-        <label htmlFor="level-select">Select Tree Level:</label>
-        <select
-          id="level-select"
-          value={level}
-          onChange={(e) => setLevel(Number(e.target.value))}
-        >
-          {[...Array(5)].map((_, i) => (
-            <option key={i + 1} value={i + 1}>{`Level ${i + 1}`}</option>
-          ))}
-        </select>
-      </div>
-      <canvas ref={canvasRef} width={800} height={600}></canvas>
-      <div>
-        <button onClick={() => startTraversal("inOrder")}>In-Order</button>
-        <button onClick={() => startTraversal("preOrder")}>Pre-Order</button>
-        <button onClick={() => startTraversal("postOrder")}>Post-Order</button>
+    <div className="w-full h-screen flex items-center justify-center">
+      <svg ref={svgRef} className="absolute top-0 left-0" />
+      <div className="absolute top-4 right-4 flex items-center gap-2 bg-white p-2 shadow-lg rounded">
+        <label htmlFor="levels" className="text-black">Levels:</label>
+        <input
+          id="levels"
+          type="number"
+          value={levels}
+          onChange={(e) => setLevels(Math.min(5, Math.max(1, Number(e.target.value))))}
+          className="border rounded px-2 py-1 text-black"
+          min="1"
+          max="5"
+        />
       </div>
     </div>
   );
 };
 
-export default BinaryTreeWithCanvas;
+export default BinaryTree;
