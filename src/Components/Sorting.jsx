@@ -6,7 +6,6 @@ const SortingVisualizer = () => {
   const [delay, setDelay] = useState(300);
   const [activeIndex, setActiveIndex] = useState(null);
   const [isSorting, setIsSorting] = useState(false);
-  const [glow, setGlow] = useState(false); // Flag for glow effect
   const [notification, setNotification] = useState(""); // Notification message
   const [isSorted, setIsSorted] = useState(false); // Flag to track if the array is sorted
 
@@ -39,7 +38,7 @@ const SortingVisualizer = () => {
       while (j >= 0 && arr[j] > key) {
         arr[j + 1] = arr[j];
         j--;
-        setActiveIndex(i);
+        setActiveIndex(i); // Update active index
         setArray([...arr]);
         await new Promise((resolve) => setTimeout(resolve, delay));
       }
@@ -50,12 +49,7 @@ const SortingVisualizer = () => {
     setActiveIndex(null);
     setIsSorting(false); // Mark sorting as complete
 
-    // Apply green glow effect after sorting is done
-    setGlow(true);
     setIsSorted(true); // Set the array as sorted
-    setTimeout(() => setGlow(false), 3000); // Glow for 3 seconds
-
-    // Show notification
     setNotification("Sorting Finished!");
     setTimeout(() => setNotification(""), 3000); // Notification disappears after 3 seconds
   };
@@ -98,12 +92,20 @@ const SortingVisualizer = () => {
 
       {/* Sorting Finished Notification */}
       {notification && (
-        <div
+        <motion.div
           className="fixed bottom-10 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-10"
-          style={{ transition: "opacity 1s", opacity: notification ? 1 : 0 }}
+          initial={{ opacity: 0, y: 50 }}  // Start position: invisible and below
+          animate={{ opacity: 1, y: 0 }}    // End position: visible and at original position
+          exit={{ opacity: 0, y: 50 }}      // Exit position: invisible and below
+          transition={{
+            type: 'spring',
+            stiffness: 200,
+            damping: 25,
+            duration: 0.5
+          }}
         >
           {notification}
-        </div>
+        </motion.div>
       )}
 
       {/* Block Container */}
@@ -117,7 +119,7 @@ const SortingVisualizer = () => {
             transition={{ type: 'spring', stiffness: 500, damping: 20 }} // Higher spring for more bounce
           >
             <div
-              className={`w-10 h-10 border-2 rounded-lg shadow-lg ${glow ? 'bg-green-500 ring-4 ring-green-600' : 'bg-cream'} ${activeIndex === index ? 'ring-4 ring-yellow-500' : ''}`}
+              className={`w-10 h-10 border-2 rounded-lg shadow-lg ${activeIndex === index ? 'bg-yellow-500 ring-4 ring-yellow-600' : 'bg-cream'} ${isSorting && activeIndex === index ? 'bg-yellow-300 ring-4 ring-yellow-500' : ''}`}
               style={{
                 height: `${value * 10}px`,
                 backgroundColor: '#f5f5dc',
