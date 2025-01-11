@@ -84,7 +84,7 @@ const Home = () => {
         animate={{ opacity: 1 }}
         transition={{ delay: 1, duration: 0.5 }}
       >
-        © 2024 Team Project. All Rights Reserved.
+        © 2025 Team Project. All Rights Reserved.
       </motion.footer>
     </div>
   );
