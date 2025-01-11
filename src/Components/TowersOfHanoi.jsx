@@ -86,7 +86,7 @@ const TowerOfHanoi = () => {
         <input
           type="number"
           value={disks}
-          min={3}
+          min={1}
           max={5}
           onChange={(e) => {
             const num = parseInt(e.target.value);
