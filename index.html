@@ -21,17 +21,56 @@
       /* Apply background color and font globally */
       body {
         font-family: 'Puppet Snowman', cursive;
-        background-color: #f7f7f7;
+        background-color: #ffffff; /* Set background color to white */
+        color: #000000; /* Set text color to black for better contrast */
       }
 
       /* Ensure root element takes full screen */
       #root {
         width: 100%;
-        height: 100%;
+        height: calc(100% - 50px); /* Adjust height to account for header */
+        display: flex;
+        justify-content: center;
+        align-items: center; /* Center content vertically and horizontally */
+        margin-top: 1px; /* Minimal margin to effectively center the program */
+      }
+
+      /* Style for the header */
+      header {
+        display: flex;
+        justify-content: flex-end;
+        align-items: center;
+        height: 50px;
+        background-color: #ffffff; /* Match background color to white */
+        padding-right: 20px; /* Add some padding to the right */
+        position: fixed;
+        top: 0;
+        width: 100%; /* Ensure header spans the full width */
+      }
+
+      header a {
+        color: #000000; /* Change text color to black */
+        text-decoration: none;
+        margin-left: 20px; /* Add some space between the links */
+      }
+
+      /* Home icon */
+      .home-icon {
+        width: 32px;
+        height: 32px;
+        fill: #000000;
       }
     </style>
   </head>
   <body>
+    <header>
+      <a href="/">
+        <svg class="home-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+          <path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/>
+        </svg>
+      </a>
+      <a href="/about">About</a>
+    </header>
     <div id="root"></div>
     <script type="module" src="/src/main.jsx"></script>
   </body>

@@ -1,0 +1,39 @@
+@keyframes draw {
+    from {
+      stroke-dasharray: 0, 1000;
+    }
+    to {
+      stroke-dasharray: 1000, 0;
+    }
+  }
+  
+  #secondStroke {
+    stroke-dasharray: 255;
+    stroke-dashoffset: 255;
+    animation: draw 0.5s linear forwards;
+    animation-delay: 0.2s;
+  }
+  
+  #firstStroke {
+    stroke-dasharray: 255;
+    stroke-dashoffset: 255;
+    animation: draw 0.5s linear forwards;
+  }
+  
+  @keyframes drawO {
+    from {
+      stroke-dasharray: 0, 685;
+      stroke-dashoffset: 0;
+    }
+    to {
+      stroke-dasharray: 685, 0;
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  #O {
+    stroke-dasharray: 685;
+    stroke-dashoffset: 685;
+    animation: drawO 0.5s linear forwards;
+  }
+  

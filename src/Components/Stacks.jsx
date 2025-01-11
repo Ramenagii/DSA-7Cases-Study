@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCar } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { AiOutlineReload } from "react-icons/ai"; // Import reset icon
 
 const GarageStack = () => {
   const [stack, setStack] = useState([]);
@@ -106,16 +105,8 @@ const GarageStack = () => {
     setError("");
   };
 
-  const handleReset = () => {
-    // Reset the stack, input, error messages, and counts
-    setStack([]);
-    setInput("");
-    setError("");
-    setCounts({});
-  };
-
   return (
-    <div className="flex flex-col items-center justify-center h-screen bg-white text-black">
+    <div className="flex flex-col items-center justify-center h-screen bg-white text-black pt-10">
       <h1 className="text-3xl font-bold mb-4">Stack Garage</h1>
       <p className="text-gray-700 mb-6 text-center">
         A stack garage follows the LIFO (Last In, First Out) principle. Cars can
@@ -149,7 +140,7 @@ const GarageStack = () => {
       </div>
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      <div className="grid grid-cols-10 gap-2 p-4 border-dashed border-2 border-gray-800 rounded-lg bg-gray-200 w-auto">
+      <div className="grid grid-cols-10 gap-2 p-4 border-2 border-gray-800 border-r-0 rounded-lg bg-gray-200 w-auto">
         {Array.from({ length: 10 }, (_, i) => (
           <motion.div
             key={i}
@@ -159,9 +150,9 @@ const GarageStack = () => {
               {stack[i] && (
                 <motion.div
                   key={stack[i].animationKey || stack[i].plate}
-                  initial={{ x: -50, opacity: 0 }} // Start from left
+                  initial={{ x: 50, opacity: 0 }} // Start from right
                   animate={{ x: 0, opacity: 1 }} // Animate to the position
-                  exit={{ x: -50, opacity: 0 }} // Exit to the left
+                  exit={{ x: 50, opacity: 0 }} // Exit to the right
                   transition={{ duration: 0.5 }}
                   className={`relative w-full h-full flex items-center justify-center rounded-md text-white font-bold ${stack[i].color}`}
                 >
@@ -189,18 +180,6 @@ const GarageStack = () => {
             ))}
           </ul>
         )}
-      </div>
-
-      {/* Reset Icon */}
-      <div className="absolute top-10 right-4">
-        <motion.button
-          onClick={handleReset}
-          className="bg-gray-500 text-white p-2 rounded-full hover:bg-gray-400 transition"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <AiOutlineReload className="text-2xl" />
-        </motion.button>
       </div>
     </div>
   );

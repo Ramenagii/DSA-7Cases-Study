@@ -2,8 +2,7 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaCar } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
-import { AiOutlineReload } from "react-icons/ai"; // Import reset icon
-import { IoMdArrowForward, IoMdArrowBack } from "react-icons/io"; // Import arrows for entrance and exit
+import { IoMdArrowBack } from "react-icons/io"; // Only import back arrow
 
 const QueueGarage = () => {
   const [queue, setQueue] = useState([]);
@@ -11,7 +10,6 @@ const QueueGarage = () => {
   const [error, setError] = useState("");
   const [counts, setCounts] = useState({});
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [entranceExit, setEntranceExit] = useState(""); // Track the latest entrance/exit
 
   const getRandomColor = () => {
     const colors = [
@@ -43,9 +41,6 @@ const QueueGarage = () => {
       [input]: { arrival: (prev[input]?.arrival || 0) + 1, departure: prev[input]?.departure || 0 }
     }));
 
-    // Set entrance indication
-    setEntranceExit(`Car with plate ${input} entered the queue.`);
-
     setQueue([...queue, { plate: input, color: getRandomColor() }]);
     setInput("");
     setError("");
@@ -72,9 +67,6 @@ const QueueGarage = () => {
     const carsToRemove = queue.slice(0, index + 1); // Remove all cars up front as well
     const remainingCars = queue.slice(index + 1);
 
-    // Set exit indication
-    setEntranceExit(`Car with plate ${carsToRemove[0].plate} and others in front have departed from the queue.`);
-
     // Update departure counts for all cars in the front
     carsToRemove.forEach((car) => {
       setCounts((prev) => ({
@@ -87,17 +79,8 @@ const QueueGarage = () => {
     });
 
     setQueue(remainingCars);
-
     setInput("");
     setError("");
-  };
-
-  const handleReset = () => {
-    setQueue([]);
-    setInput("");
-    setError("");
-    setCounts({});
-    setEntranceExit("");
   };
 
   return (
@@ -107,19 +90,6 @@ const QueueGarage = () => {
         A queue garage follows the FIFO (First In, First Out) principle. Cars can
         only be added to the back and removed from the front of the queue.
       </p>
-
-      {/* Entrance/Exit Log */}
-      {entranceExit && (
-        <motion.div
-          className="p-4 bg-blue-100 text-blue-700 mb-4 rounded-md"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          {entranceExit}
-        </motion.div>
-      )}
 
       <div className="flex gap-2 mb-4">
         <input
@@ -149,13 +119,10 @@ const QueueGarage = () => {
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
       <div className="relative w-auto">
-        <div className="grid grid-cols-10 gap-2 p-4 border-dashed border-2 border-gray-800 rounded-lg bg-gray-200">
-          {/* Entrance and Exit Indicators */}
+        <div className="grid grid-cols-10 gap-2 p-4 border-dashed border-t-2 border-b-2 border-gray-800 rounded-lg bg-gray-200">
+          {/* Entrance Indicator */}
           <motion.div className="absolute left-0 top-2">
             <IoMdArrowBack className="text-blue-500 text-3xl" />
-          </motion.div>
-          <motion.div className="absolute right-0 top-2">
-            <IoMdArrowForward className="text-red-500 text-3xl" />
           </motion.div>
 
           {Array.from({ length: 10 }, (_, i) => (
@@ -198,18 +165,6 @@ const QueueGarage = () => {
             ))}
           </ul>
         )}
-      </div>
-
-      {/* Reset Icon */}
-      <div className="absolute top-4 right-4">
-        <motion.button
-          onClick={handleReset}
-          className="bg-gray-500 text-white p-2 rounded-full hover:bg-gray-400 transition"
-          whileHover={{ scale: 1.1 }}
-          whileTap={{ scale: 0.9 }}
-        >
-          <AiOutlineReload className="text-2xl" />
-        </motion.button>
       </div>
     </div>
   );
