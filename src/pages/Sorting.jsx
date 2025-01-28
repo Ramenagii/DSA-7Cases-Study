@@ -10,17 +10,19 @@ const SortingVisualizer = () => {
     const [notification, setNotification] = useState(""); // Notification message
     const [isSorted, setIsSorted] = useState(false); // Flag to track if the array is sorted
     const [sortMethod, setSortMethod] = useState("insertion");
-    const [arraySize, setArraySize] = useState(5);
+    const [arraySize, setArraySize] = useState(10);
+    const [sortDuration, setSortDuration] = useState(null); // Timer for sorting duration
 
     useEffect(() => {
-        generateRandomArray();
+        generateRandomArray(arraySize);
     }, []);
 
     const generateRandomArray = (size) => {
         if (isSorting) return; // Prevent new array generation while sorting
-        const newArray = Array.from({ length: size }, () => Math.floor(Math.random() * 70) + 1); // Fixed size of array
+        const newArray = Array.from({ length: size }, () => Math.floor(Math.random() * 50) + 1); // Fixed size of array
         setArray(newArray);
         setIsSorted(false); // Reset sorted flag when generating a new array
+        setSortDuration(null); // Reset sort duration when generating a new array
     };
 
     const handleSortMethodChange = (event) => {
@@ -29,6 +31,7 @@ const SortingVisualizer = () => {
 
     const sortArray = async () => {
         if (isSorting) return; // Prevent sorting if already in progress
+        const startTime = new Date(); // Start timer
         switch (sortMethod) {
             case "insertion":
                 await insertionSort();
@@ -54,17 +57,20 @@ const SortingVisualizer = () => {
             default:
                 break;
         }
+        const endTime = new Date(); // End timer
+        setSortDuration((endTime - startTime) / 1000); // Calculate duration in seconds
     };
 
     const handleDelayChange = (e) => {
         setDelay(Number(e.target.value));
-      };
+    };
 
     const handleArraySizeChange = (e) => {
         const size = Number(e.target.value);
         setArraySize(size);
         generateRandomArray(size); // Generate a new random array of the updated size
-      };
+    };
+
     const insertionSort = async () => {
         setIsSorting(true);
         let arr = array.slice();
@@ -88,7 +94,7 @@ const SortingVisualizer = () => {
         setNotification("Sorting Complete!");
         setTimeout(() => setNotification(""), 3000);
     };
-
+ 
     const selectionSort = async () => { 
         setIsSorting(true);
         let arr = array.slice();
@@ -108,8 +114,13 @@ const SortingVisualizer = () => {
             setArray([...arr]);
             await new Promise((resolve) => setTimeout(resolve, delay));
         }
-
+        setIsSorting(false);
+        setIsSorted(true);
+        setActiveIndex(null);
+        setNotification("Sorting Complete!");
+        setTimeout(() => setNotification(""), 3000);
     };
+
     const bubbleSort = async () => {
         setIsSorting(true);
         let arr = array.slice();
@@ -131,7 +142,7 @@ const SortingVisualizer = () => {
         setActiveIndex(null);
         setNotification("Sorting Complete!");
         setTimeout(() => setNotification(""), 3000);
-     };
+    };
 
     const mergeSort = async () => { 
         const merge = async (arr, l, m, r) => {
@@ -188,8 +199,9 @@ const SortingVisualizer = () => {
         setIsSorted(true);
         setActiveIndex(null);
         setNotification("Sorting Complete!");
-        setTimeout(() => setNotification(""), 300)
+        setTimeout(() => setNotification(""), 3000);
     };
+
     const shellSort = async () => { 
         setIsSorting(true);
         let arr = array.slice();
@@ -213,6 +225,7 @@ const SortingVisualizer = () => {
         setNotification("Sorting Complete!");
         setTimeout(() => setNotification(""), 3000);
     };
+
     const quickSort = async () => {
         const partition = async (arr, low, high) => {
             let pivot = arr[high];
@@ -251,7 +264,8 @@ const SortingVisualizer = () => {
         setActiveIndex(null);
         setNotification("Sorting Complete!");
         setTimeout(() => setNotification(""), 3000);
-     };
+    };
+
     const heapSort = async () => {
         const heapify = async (arr, n, i) => {
             let largest = i;
@@ -303,7 +317,7 @@ const SortingVisualizer = () => {
             <div className="flex flex-col items-center mb-8 p-6 border rounded-lg shadow-lg bg-white w-full max-w-3xl">
                 {/* Sorting Finished Notification */}
                 {notification && (
-                    <motion.div className="fixed top-1/2    bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-10"
+                    <motion.div className="fixed top-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-10"
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 50 }}
@@ -315,7 +329,7 @@ const SortingVisualizer = () => {
                 <div className="flex flex-col gap-4 mt-4 w-full">
                     <div className="flex gap-4 justify-between">
                         <button className="flex-1 px-6 py-3 text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out" 
-                                onClick={generateRandomArray} 
+                                onClick={() => generateRandomArray(arraySize)} 
                                 disabled={isSorting}>Generate Random Array</button>
                         <button className="flex-1 px-6 py-3 text-white bg-green-500 rounded-lg shadow-lg hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all duration-300 ease-in-out" 
                                 onClick={sortArray} 
@@ -323,20 +337,6 @@ const SortingVisualizer = () => {
                         <button className="flex-1 px-6 py-3 text-white bg-red-500 rounded-lg shadow-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300 ease-in-out" 
                                 onClick={() => setArray([...array].reverse())} 
                                 disabled={isSorting}>Reverse Array</button>        
-                    </div>
-                    <div className="mb-4">
-                        <label className="text-sm font-medium mr-2">
-                         Array Size: {arraySize}
-                        </label>
-                            <input
-                            type="range"
-                            min="5"
-                            max="20"
-                            step="1"
-                            value={arraySize}
-                            onChange={handleArraySizeChange}
-                            className="w-64"
-                            />
                     </div>
                     <div className="mt-4">
                         <select className="w-full px-6 py-3 text-black bg-white border rounded-lg shadow-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" 
@@ -353,6 +353,20 @@ const SortingVisualizer = () => {
                         </select>
                     </div>
                     <div className="mb-4">
+                        <label className="text-sm font-medium mr-2">
+                         Array Size: {arraySize}
+                        </label>
+                            <input
+                            type="range"
+                            min="10"
+                            max="30"
+                            step="1"
+                            value={arraySize}
+                            onChange={handleArraySizeChange}
+                            className="w-64"
+                            />
+                    </div>
+                    <div className="mb-4">
                         <label className="text-sm font-medium mr-2">Delay: {delay} ms</label>
                             <input
                             type="range"
@@ -364,6 +378,13 @@ const SortingVisualizer = () => {
                             className="w-64"
                             />
                     </div>
+                    {/* Timer Display */}
+                    {sortDuration && (
+                    <div className="text-lg font-semibold text-green-600">
+                        Sort Duration: {sortDuration} seconds
+                    </div>
+                )}
+                <div className="mb-4"></div>
                 </div>
             </div>
             {/* Block Container */}
