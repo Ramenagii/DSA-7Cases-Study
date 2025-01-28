@@ -303,7 +303,7 @@ const SortingVisualizer = () => {
             <div className="flex flex-col items-center mb-8 p-6 border rounded-lg shadow-lg bg-white w-full max-w-3xl">
                 {/* Sorting Finished Notification */}
                 {notification && (
-                    <motion.div className="fixed top-20 left-1/2 transform -translate-x-1/2 bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-10"
+                    <motion.div className="fixed top-1/2    bg-green-500 text-white px-4 py-2 rounded-lg shadow-lg z-10"
                                 initial={{ opacity: 0, y: 50 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 exit={{ opacity: 0, y: 50 }}
