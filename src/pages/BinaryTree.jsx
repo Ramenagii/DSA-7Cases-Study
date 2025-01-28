@@ -8,7 +8,7 @@ const BinaryTree = () => {
 
   useEffect(() => {
     const generateData = (level, value = 0) => {
-      if (level > levels || level > 4) return null;
+      if (level > levels || level > 5) return null;
       return {
         name: value.toString(),
         children: [
