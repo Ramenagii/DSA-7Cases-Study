@@ -17,7 +17,7 @@ const SortingVisualizer = () => {
         generateRandomArray(arraySize);
     }, []);
 
-    const generateRandomArray = (size) => {
+    const generateRandomArray = () => {
         if (isSorting) return; // Prevent new array generation while sorting
         const newArray = Array.from({ length: size }, () => Math.floor(Math.random() * 50) + 1); // Fixed size of array
         setArray(newArray);
@@ -44,9 +44,6 @@ const SortingVisualizer = () => {
                 break;
             case "merge":
                 await mergeSort();
-                break;
-            case "shell":
-                await shellSort();
                 break;
             case "quick":
                 await quickSort();
@@ -336,7 +333,7 @@ const SortingVisualizer = () => {
                                 disabled={isSorting || isSorted}>Sort</button>
                         <button className="flex-1 px-6 py-3 text-white bg-red-500 rounded-lg shadow-lg hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500 transition-all duration-300 ease-in-out" 
                                 onClick={() => setArray([...array].reverse())} 
-                                disabled={isSorting}>Reverse Array</button>        
+                                disabled={isSorting}>Reverse Array</button>
                     </div>
                     <div className="mt-4">
                         <select className="w-full px-6 py-3 text-black bg-white border rounded-lg shadow-lg hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-gray-500" 
@@ -347,7 +344,6 @@ const SortingVisualizer = () => {
                             <option value="selection">Selection Sort</option>
                             <option value="bubble">Bubble Sort</option>
                             <option value="merge">Merge Sort</option>
-                            <option value="shell">Shell Sort</option>
                             <option value="quick">Quick Sort</option>
                             <option value="heap">Heap Sort</option>
                         </select>
