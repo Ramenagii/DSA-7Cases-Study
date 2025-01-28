@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import "../Styles/tictactoe.css";
-import Sidebar from "../components/sidebar";
+import Sidebar from "../Components/sidebar";
 
 const XSymbol = ({ initialAnimation = true }) => (
   <motion.svg
