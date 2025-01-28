@@ -21,7 +21,7 @@ function Landing() {
     <>
       <div
         id="Visualize"
-        className="relative flex flex-col items-center justify-center min-h-screen bg-gray-900 p-4"
+        className="relative flex flex-col items-center justify-center min-h-screen bg-white p-4"
       >
         {/* Navbar */}
           <nav className="w-full h-[200px] p-4 fixed top-0 navbar-gradient z-40">
@@ -54,7 +54,7 @@ function Landing() {
         <Plates />
 
         {/* Hero */}
-          <div className="relative mt-[500px] z-20 text-center text-white">
+          <div className="relative mt-[500px] z-20 text-center text-slate-950">
             <h1 className="text-5xl font-bold mb-4">
               Data Structure and Algorithm Visualizer
             </h1>
@@ -142,7 +142,7 @@ function Landing() {
       </section>
 
       {/* Contact section */}
-      <section id="Contacts" className="bg-gray-900 text-white py-16">
+      <section id="Contacts" className="bg-white text-slate-950 py-16">
         <div className="container mx-auto px-6">
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold">Get in Touch</h2>
@@ -153,8 +153,8 @@ function Landing() {
           </div>
           <div className="flex justify-center">
             <div className="w-full md:w-2/3 lg:w-1/2">
-              <form className="bg-gray-800 p-8 rounded-lg shadow-lg">
-                <div className="mb-4">
+              <form className="bg-slate-400 p-8 rounded-lg shadow-lg">
+                <div className="mb-4 text-alate-700">
                   <label
                     className="block text-sm font-semibold mb-2"
                     htmlFor="name"
@@ -162,13 +162,13 @@ function Landing() {
                     Name
                   </label>
                   <input
-                    className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    className="w-full px-4 py-2 bg-gray-200 text-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                     type="text"
                     id="name"
                     placeholder="Your Name"
                   />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 text-slate-700">
                   <label
                     className="block text-sm font-semibold mb-2"
                     htmlFor="email"
@@ -176,13 +176,13 @@ function Landing() {
                     Email
                   </label>
                   <input
-                    className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    className="w-full px-4 py-2 bg-gray-200 text-slate-800 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                     type="email"
                     id="email"
                     placeholder="Your Email"
                   />
                 </div>
-                <div className="mb-4">
+                <div className="mb-4 text-slate-700">
                   <label
                     className="block text-sm font-semibold mb-2"
                     htmlFor="message"
@@ -190,13 +190,13 @@ function Landing() {
                     Message
                   </label>
                   <textarea
-                    className="w-full px-4 py-2 bg-gray-700 text-white rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
+                    className="w-full px-4 py-2 bg-gray-200 text-slate-900 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-600"
                     id="message"
                     rows="5"
                     placeholder="Your Message"
                   ></textarea>
                 </div>
-                <button className="w-full py-3 mt-4 bg-purple-600 hover:bg-purple-700 rounded-lg text-white font-semibold">
+                <button className="w-full py-3 mt-4 bg-[#907AD6] hover:bg-purple-700 rounded-lg text-white font-semibold">
                   Send Message
                 </button>
               </form>
