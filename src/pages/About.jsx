@@ -38,6 +38,7 @@ const Home = () => {
   };
 
   return (
+    // ABout Page
     <div className="min-h-screen bg-grey-400 text-gray-900 flex flex-col items-center justify-center">
       <motion.h1
         className="text-4xl font-bold mb-8 text-center text-black"
