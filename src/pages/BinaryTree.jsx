@@ -8,7 +8,7 @@ const BinaryTree = () => {
 
   useEffect(() => {
     const generateData = (level, value = 0) => {
-      if (level > levels || level > 5) return null;
+      if (level > levels || level > 4) return null;
       return {
         name: value.toString(),
         children: [
@@ -103,8 +103,8 @@ const BinaryTree = () => {
           value={levels}
           onChange={(e) => setLevels(Math.min(5, Math.max(1, Number(e.target.value))))}
           className="border rounded px-2 py-1 text-black"
-          min="0"
-          max="4"
+          min="1"
+          max="5"
         />
       </div>
     </div>
