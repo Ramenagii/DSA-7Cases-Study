@@ -12,7 +12,7 @@ const BinaryTree = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   useEffect(() => {
-    const generateData = (level, value = 1) => {
+    const generateData = (level, value = 0) => {
       if (level > levels || level > 5) return null;
       return {
         name: value.toString(),
