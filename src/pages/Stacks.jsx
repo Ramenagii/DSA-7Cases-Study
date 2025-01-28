@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaCar } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Sidebar from "../components/sidebar";
 import "../Styles/GarageStack.css"; // Import futuristic styles
@@ -39,7 +38,7 @@ const GarageStack = () => {
         [input]: { arrival: (prev[input]?.arrival || 0) + 1, departure: prev[input]?.departure || 0 },
       }));
 
-      setStack([...stack, { plate: input, color: getRandomColor() }]); // Add new car at the END
+      setStack([...stack, { plate: input, color: getRandomColor(), image: "/src/assets/images/ufo/ufo1.png" }]);
       setError("");
     } else {
       // Remove car if it exists
@@ -119,7 +118,8 @@ const GarageStack = () => {
                     transition={{ duration: 0.5 }}
                     className={`car ${car.color}`}
                   >
-                    <FaCar className="mr-2" /> {car.plate}
+                    <img src={car.image} alt="Car" className="car-image" />
+                    <p>{car.plate}</p>
                   </motion.div>
                 )}
               </AnimatePresence>
