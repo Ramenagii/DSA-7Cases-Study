@@ -54,25 +54,25 @@ function Landing() {
         <Plates />
 
         {/* Hero */}
-        <div className="relative mt-[500px] z-20 text-center text-white">
-          <h1 className="text-5xl font-bold mb-4">
-            Data Structure and Algorithm Visualizer
-          </h1>
-          <p className="text-xl mb-8 text-center max-w-2xl mx-auto">
-            Discover the power of data structures and algorithms with examples
-            like Tower of Hanoi, garage stacks, queues, and Tic-Tac-Toe lists.
-            Explore their real-world applications in an interactive way!
-          </p>
-          <button
-            className="px-6 py-3 mt-6 bg-[#907AD6] text-white rounded hover:bg-lilac-700 font-arcade"
-            onClick={handleGetStartedClick}
-          >
-            Get Started
-          </button>
-        </div>
-      </div>
+          <div className="relative mt-[500px] z-20 text-center text-white">
+            <h1 className="text-5xl font-bold mb-4">
+              Data Structure and Algorithm Visualizer
+            </h1>
+            <p className="text-xl mb-8 text-center max-w-2xl mx-auto">
+              Discover the power of data structures and algorithms with examples
+              like Tower of Hanoi, garage stacks, queues, and Tic-Tac-Toe lists.
+              Explore their real-world applications in an interactive way!
+            </p>
+            <button
+              className="px-6 py-3 mt-6 bg-[#907AD6] text-white rounded hover:bg-[#6B5B95] hover:scale-105 transition-transform duration-300 font-arcade"
+              onClick={handleGetStartedClick}
+            >
+              Get Started
+            </button>
+          </div>
+          </div>
 
-      {/* team section */}
+          {/* team section */}
       <section id="Team" className="w-full h-[600px] bg-[#4F518C]">
         <div className="flex flex-col items-center justify-center h-full text-white m-">
           <div className="flex flex-col items-center justify-center mt-12">

@@ -21,7 +21,7 @@ function Plates() {
           </div>
         </a>
         <a href="/queue">
-          <div className="w-52 h-80 bg-white bg-opacity-25 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
+          <div className="w-52 h-80 bg-white bg-opacity-25 rou</a>nded-lg p-6 shadow-lg transform tra</div>nsition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
             <img
               src={queue}
               alt="queue"
