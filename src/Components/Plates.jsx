@@ -12,7 +12,7 @@ function Plates() {
     <>
       <div className="absolute mt-[-220px] flex justify-center space-x-4 z-30 gap-8 w-full">
         <a href="/stacks">
-          <div className="w-52 h-80 bg-white bg-opacity-25 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
+          <div className="w-52 h-80 bg-slate-900 bg-opacity-45 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
             <img
               src={stacks}
               alt="stacks"
@@ -21,7 +21,7 @@ function Plates() {
           </div>
         </a>
         <a href="/queue">
-          <div className="w-52 h-80 bg-white bg-opacity-25 rou</a>nded-lg p-6 shadow-lg transform tra</div>nsition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
+          <div className="w-52 h-80 bg-slate-900 bg-opacity-45 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
             <img
               src={queue}
               alt="queue"
@@ -30,7 +30,7 @@ function Plates() {
           </div>
         </a>
         <a href="/tic-tac-toe">
-          <div className="w-52 h-80 bg-white bg-opacity-25 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
+          <div className="w-52 h-80 bg-slate-900 bg-opacity-45 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
             <img
               src={tictactoe}
               alt="tic-tac-toe"
@@ -39,7 +39,7 @@ function Plates() {
           </div>
         </a>
         <a href="/binary-tree">
-          <div className="w-52 h-80 bg-white bg-opacity-25 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
+          <div className="w-52 h-80 bg-slate-900 bg-opacity-45 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
             <img
               src={binary}
               alt="binary-tree"
@@ -48,7 +48,7 @@ function Plates() {
           </div>
         </a>
         <a href="/bst">
-          <div className="w-52 h-80 bg-white bg-opacity-25 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
+          <div className="w-52 h-80 bg-slate-900 bg-opacity-45 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
             <img
               src={bst}
               alt="bst"
@@ -57,7 +57,7 @@ function Plates() {
           </div>
         </a>
         <a href="/towers-of-hanoi">
-          <div className="w-52 h-80 bg-white bg-opacity-25 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
+          <div className="w-52 h-80 bg-slate-900 bg-opacity-45 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
             <img
               src={hanoi}
               alt="towers-of-hanoi"
@@ -66,7 +66,7 @@ function Plates() {
           </div>
         </a>
         <a href="/sorting">
-          <div className="w-52 h-80 bg-white bg-opacity-25 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
+          <div className="w-52 h-80 bg-slate-900 bg-opacity-45 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
             <img
               src={sort}
               alt="sorting"
