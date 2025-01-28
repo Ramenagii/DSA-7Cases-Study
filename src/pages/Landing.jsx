@@ -14,7 +14,7 @@ function Landing() {
   const navigate = useNavigate();
 
   const handleGetStartedClick = () => {
-    navigate("/stacks");
+    navigate("/tic-tac-toe");
   };
 
   return (
