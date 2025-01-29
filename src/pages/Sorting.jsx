@@ -17,7 +17,7 @@ const SortingVisualizer = () => {
         generateRandomArray(arraySize);
     }, []);
 
-    const generateRandomArray = () => {
+    const generateRandomArray = (size) => {
         if (isSorting) return; // Prevent new array generation while sorting
         const newArray = Array.from({ length: size }, () => Math.floor(Math.random() * 50) + 1); // Fixed size of array
         setArray(newArray);
@@ -44,6 +44,9 @@ const SortingVisualizer = () => {
                 break;
             case "merge":
                 await mergeSort();
+                break;
+            case "shell":
+                await shellSort();
                 break;
             case "quick":
                 await quickSort();
@@ -344,6 +347,7 @@ const SortingVisualizer = () => {
                             <option value="selection">Selection Sort</option>
                             <option value="bubble">Bubble Sort</option>
                             <option value="merge">Merge Sort</option>
+                            <option value="shell">Shell Sort</option>
                             <option value="quick">Quick Sort</option>
                             <option value="heap">Heap Sort</option>
                         </select>
