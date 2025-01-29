@@ -10,7 +10,17 @@ import sort from "../assets/images/icons/app-icons/sort.svg";
 function Plates() {
   return (
     <>
+    
       <div className="absolute mt-[-220px] flex justify-center space-x-4 z-30 gap-8 w-full">
+        <a href="/tic-tac-toe">
+          <div className="w-52 h-80 bg-white bg-opacity-25 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
+            <img
+              src={tictactoe}
+              alt="tic-tac-toe"
+              className="w-full h-full object-contain"
+            />
+          </div>
+        </a>
         <a href="/stacks">
           <div className="w-52 h-80 bg-white bg-opacity-25 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
             <img
@@ -25,15 +35,6 @@ function Plates() {
             <img
               src={queue}
               alt="queue"
-              className="w-full h-full object-contain"
-            />
-          </div>
-        </a>
-        <a href="/tic-tac-toe">
-          <div className="w-52 h-80 bg-white bg-opacity-25 rounded-lg p-6 shadow-lg transform transition-transform duration-300 hover:scale-105 border border-s-white-1 hover:border-white flex items-center hover:cursor-pointer backdrop-filter backdrop-blur-lg">
-            <img
-              src={tictactoe}
-              alt="tic-tac-toe"
               className="w-full h-full object-contain"
             />
           </div>
