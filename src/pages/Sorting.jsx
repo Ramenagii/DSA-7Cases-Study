@@ -74,7 +74,9 @@ const SortingVisualizer = () => {
 
     const insertionSort = async () => {
         setIsSorting(true);
+        setSortedIndices([]); // Reset sorted indices before starting the sort
         let arr = array.slice();
+        let newSortedIndices = [];
         for (let i = 1; i < arr.length; i++) {
             let key = arr[i];
             let j = i - 1;
@@ -88,7 +90,11 @@ const SortingVisualizer = () => {
             arr[j + 1] = key;
             setArray([...arr]);
             await new Promise(r => setTimeout(r, delay));
+            newSortedIndices.push(i);
+            setSortedIndices([...newSortedIndices]);
         }
+        newSortedIndices.push(0); // Add the first element as sorted
+        setSortedIndices([...newSortedIndices]);
         setIsSorting(false);
         setIsSorted(true);
         setActiveIndex(null);
@@ -183,11 +189,17 @@ const SortingVisualizer = () => {
                 arr[k] = L[i];
                 i++;
                 k++;
+                setActiveIndex(k);
+                setArray([...arr]);
+                await new Promise((resolve) => setTimeout(resolve, delay));
             }
             while (j < n2) {
                 arr[k] = R[j];
                 j++;
                 k++;
+                setActiveIndex(k);
+                setArray([...arr]);
+                await new Promise((resolve) => setTimeout(resolve, delay));
             }
         };
         const mergeSortHelper = async (arr, l, r) => {
