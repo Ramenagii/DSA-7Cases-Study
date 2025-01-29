@@ -12,6 +12,7 @@ const SortingVisualizer = () => {
     const [sortMethod, setSortMethod] = useState("insertion");
     const [arraySize, setArraySize] = useState(10);
     const [sortDuration, setSortDuration] = useState(null); // Timer for sorting duration
+    const [sortedIndices, setSortedIndices] = useState([]);
 
     useEffect(() => {
         generateRandomArray(arraySize);
@@ -121,7 +122,7 @@ const SortingVisualizer = () => {
         setTimeout(() => setNotification(""), 3000);
     };
 
-    const bubbleSort = async () => {
+    /*const bubbleSort = async () => {
         setIsSorting(true);
         let arr = array.slice();
         let n = arr.length;
@@ -142,7 +143,37 @@ const SortingVisualizer = () => {
         setActiveIndex(null);
         setNotification("Sorting Complete!");
         setTimeout(() => setNotification(""), 3000);
+    };*/
+
+
+    const bubbleSort = async () => {
+        setIsSorting(true);
+        let arr = array.slice();
+        let n = arr.length;
+        let newSortedIndices = [];
+        for (let i = 0; i < n - 1; i++) {
+            for (let j = 0; j < n - i - 1; j++) {
+                if (arr[j] > arr[j + 1]) {
+                    let temp = arr[j];
+                    arr[j] = arr[j + 1];
+                    arr[j + 1] = temp;
+                }
+                setActiveIndex(j);
+                setArray([...arr]);
+                await new Promise((resolve) => setTimeout(resolve, delay));
+            }
+            newSortedIndices.push(n - i - 1);
+            setSortedIndices([...newSortedIndices]);
+        }
+        newSortedIndices.push(0); // Add the first element as sorted
+        setSortedIndices([...newSortedIndices]);
+        setIsSorting(false);
+        setIsSorted(true);
+        setActiveIndex(null);
+        setNotification("Sorting Complete!");
+        setTimeout(() => setNotification(""), 3000);
     };
+
 
     const mergeSort = async () => { 
         const merge = async (arr, l, m, r) => {
@@ -326,7 +357,7 @@ const SortingVisualizer = () => {
                     </motion.div>
                 )}
                 {/* Buttons and Selection Dropdown */}
-                <div className="flex flex-col gap-4 mt-4 w-full">
+                <div className="flex flex-col gap-2 mt-4 w-full">
                     <div className="flex gap-4 justify-between">
                         <button className="flex-1 px-6 py-3 text-white bg-blue-500 rounded-lg shadow-lg hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all duration-300 ease-in-out" 
                                 onClick={() => generateRandomArray(arraySize)} 
@@ -352,8 +383,8 @@ const SortingVisualizer = () => {
                             <option value="heap">Heap Sort</option>
                         </select>
                     </div>
-                    <div className="mb-4">
-                        <label className="text-sm font-medium mr-2">
+                    <div className="mb-4 flex-col gap-2 mt-4 w-full px-1">
+                        <label className="text-m font-medium mr-2">
                          Array Size: {arraySize}
                         </label>
                             <input
@@ -363,11 +394,9 @@ const SortingVisualizer = () => {
                             step="1"
                             value={arraySize}
                             onChange={handleArraySizeChange}
-                            className="w-64"
+                            className="w-32"
                             />
-                    </div>
-                    <div className="mb-4">
-                        <label className="text-sm font-medium mr-2">Delay: {delay} ms</label>
+                        <label className="text-m font-medium mr-2 pl-2 ">Delay: {delay} ms</label>
                             <input
                             type="range"
                             min="0"
@@ -375,26 +404,27 @@ const SortingVisualizer = () => {
                             step="50"
                             value={delay}
                             onChange={handleDelayChange}
-                            className="w-64"
+                            className="w-32"
                             />
-                    </div>
-                    {/* Timer Display */}
-                    {sortDuration && (
-                    <div className="text-lg font-semibold text-green-600">
-                        Sort Duration: {sortDuration} seconds
-                    </div>
+                        {/* Timer Display */}
+                        {sortDuration && (
+                        <label className="text-m font-semibold text-green-600 pl-10">
+                            Duration: {sortDuration} seconds
+                        </label>
                 )}
+                    </div>
+
                 <div className="mb-4"></div>
                 </div>
             </div>
             {/* Block Container */}
-            <div className="relative flex gap-2 items-end w-full justify-center rounded-lg p-4 border bg-white shadow-lg" style={{ height: '70vh' }}>
+            <div className="relative flex gap-2 items-end w-full justify-center rounded-lg p-4 border bg-white shadow-lg" style={{ height: '66vh' }}>
                 {array.map((value, index) => (
                     <motion.div key={index} className="relative flex flex-col items-center"
                                 initial={{ height: 0 }}
                                 animate={{ height: `${value * 10}px`, scale: 1 }}
                                 transition={{ type: 'spring', stiffness: 500, damping: 20 }}>
-                        <div className={`w-10 border-2 rounded-lg shadow-lg ${activeIndex === index ? 'bg-yellow-500 ring-4 ring-yellow-600' : 'bg-cream'} ${isSorting && activeIndex === index ? 'bg-yellow-300 ring-4 ring-yellow-500' : ''}`}
+                        <div className={`w-10 border-2 rounded-lg shadow-lg ${activeIndex === index ? 'bg-yellow-500 ring-4 ring-yellow-600' : 'bg-cream'} ${isSorting && activeIndex === index ? 'bg-yellow-300 ring-4 ring-yellow-500' : ''} ${sortedIndices.includes(index) || isSorted ? 'bg-green-500' : ''}`}
                              style={{ height: `${value * 10}px`, backgroundColor: '#f5f5dc', borderColor: 'black', boxShadow: activeIndex === index ? '0px 0px 10px 5px rgba(255, 255, 0, 0.6)' : '4px 4px 10px rgba(0, 0, 0, 0.3)', borderRadius: '8px' }}></div>
                         <motion.span className="absolute bottom-0 mt-2 text-sm"
                                      initial={{ opacity: 0 }}
