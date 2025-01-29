@@ -1,6 +1,6 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
-import Sidebar from "../components/sidebar.jsx";
+import Sidebar from "../Components/sidebar.jsx";
 
 const BinarySearchTree = () => {
   const svgRef = useRef();

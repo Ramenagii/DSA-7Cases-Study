@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import Sidebar from '../components/sidebar';
+import Sidebar from '../Components/sidebar';
 
 const SortingVisualizer = () => {
     const [array, setArray] = useState([]);

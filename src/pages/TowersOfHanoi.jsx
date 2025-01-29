@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import Sidebar from "../components/sidebar";
+import Sidebar from "../Components/sidebar";
 
 const TowerOfHanoi = () => {
   const [disks, setDisks] = useState(3);

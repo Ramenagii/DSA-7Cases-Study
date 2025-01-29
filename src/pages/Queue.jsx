@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { FaCar } from "react-icons/fa";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdArrowBack } from "react-icons/io";
-import Sidebar from "../components/sidebar";
+import Sidebar from "../Components/sidebar";
 
 // Car image paths and types
 const carTypes = {
