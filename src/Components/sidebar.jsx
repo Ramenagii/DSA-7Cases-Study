@@ -9,10 +9,17 @@ const Sidebar = () => {
   // Toggle drawer visibility
   const toggleDrawer = () => setIsOpen(!isOpen);
 
-  // Animation variants
+  // Animation variants for the sidebar
   const sidebarVariants = {
-    open: { x: 0, opacity: 1 },
-    closed: { x: "-100%", opacity: 0 },
+    open: { x: 0, opacity: 1, scale: 1 },
+    closed: { x: "-100%", opacity: 0, scale: 0.95 },
+  };
+
+  // Animation variants for links
+  const linkVariants = {
+    initial: { opacity: 0, x: -20 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: -20 },
   };
 
   return (
@@ -33,92 +40,39 @@ const Sidebar = () => {
             animate="open"
             exit="closed"
             variants={sidebarVariants}
-            transition={{ duration: 0.3 }}
-            className="fixed top-0 left-0 w-64 h-full bg-white text-white p-5 z-40 shadow-lg"
+            transition={{ duration: 0.3, ease: "easeInOut" }}
+            className="fixed top-0 left-0 w-64 h-full bg-white text-black p-5 z-40 shadow-lg rounded-r-3xl"
           >
-            <h2 className="text-black text-2xl font-bold mb-6 text-center">Menu</h2>
+            <h2 className="text-2xl font-bold mb-6 text-center">Menu</h2>
             <ul className="list-none p-0 space-y-4">
-              <li>
-                <Link
-                  to="/"
-                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
-                  onClick={toggleDrawer}
+              {[
+                { name: "Home", path: "/" },
+                { name: "Tic Tac Toe", path: "/tic-tac-toe" },
+                { name: "Stacks", path: "/stacks" },
+                { name: "Queue", path: "/queue" },
+                { name: "Binary Tree", path: "/binary-tree" },
+                { name: "BST", path: "/bst" },
+                { name: "Towers of Hanoi", path: "/towers-of-hanoi" },
+                { name: "Sorting", path: "/sorting" },
+                { name: "About", path: "/about" },
+              ].map((item, index) => (
+                <motion.li
+                  key={item.name}
+                  variants={linkVariants}
+                  initial="initial"
+                  animate="animate"
+                  exit="exit"
+                  transition={{ delay: index * 0.1, duration: 0.3 }}
                 >
-                  Home
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/tic-tac-toe"
-                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
-                  onClick={toggleDrawer}
-                >
-                  Tic Tac Toe
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/stacks"
-                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
-                  onClick={toggleDrawer}
-                >
-                  Stacks
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/queue"
-                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
-                  onClick={toggleDrawer}
-                >
-                  Queue
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/binary-tree"
-                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
-                  onClick={toggleDrawer}
-                >
-                  Binary Tree
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/bst"
-                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
-                  onClick={toggleDrawer}
-                >
-                  BST
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/towers-of-hanoi"
-                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
-                  onClick={toggleDrawer}
-                >
-                  Towers of Hanoi
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/sorting"
-                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
-                  onClick={toggleDrawer}
-                >
-                  Sorting
-                </Link>
-              </li>
-              <li>
-                <Link
-                  to="/about"
-                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
-                  onClick={toggleDrawer}
-                >
-                  About
-                </Link>
-              </li>
+                  <Link
+                    to={item.path}
+                    className="block text-lg text-black transition-transform hover:scale-105 hover:text-blue-500 rounded-md mx-auto pl-2"
+                    onClick={toggleDrawer}
+                  >
+                    {item.name}
+                  </Link>
+                </motion.li>
+              ))}
             </ul>
           </motion.div>
         )}
