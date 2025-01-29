@@ -41,7 +41,7 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/"
-                  className="block text-lg text-black hover:text-white"
+                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
                   onClick={toggleDrawer}
                 >
                   Home
@@ -50,7 +50,7 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/tic-tac-toe"
-                  className="block text-lg text-black hover:text-white"
+                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
                   onClick={toggleDrawer}
                 >
                   Tic Tac Toe
@@ -59,7 +59,7 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/stacks"
-                  className="block text-lg text-black hover:text-white"
+                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
                   onClick={toggleDrawer}
                 >
                   Stacks
@@ -68,7 +68,7 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/queue"
-                  className="block text-lg text-black hover:text-white"
+                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
                   onClick={toggleDrawer}
                 >
                   Queue
@@ -77,7 +77,7 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/binary-tree"
-                  className="block text-lg text-black hover:text-white"
+                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
                   onClick={toggleDrawer}
                 >
                   Binary Tree
@@ -86,7 +86,7 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/bst"
-                  className="block text-lg text-black hover:text-white"
+                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
                   onClick={toggleDrawer}
                 >
                   BST
@@ -95,7 +95,7 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/towers-of-hanoi"
-                  className="block text-lg text-black hover:text-white"
+                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
                   onClick={toggleDrawer}
                 >
                   Towers of Hanoi
@@ -104,7 +104,7 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/sorting"
-                  className="block text-lg text-black hover:text-white"
+                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
                   onClick={toggleDrawer}
                 >
                   Sorting
@@ -113,7 +113,7 @@ const Sidebar = () => {
               <li>
                 <Link
                   to="/about"
-                  className="block text-lg text-black hover:text-white"
+                  className="block text-lg text-black transition-shadow hover:shadow-lg hover:text-black rounded-md mx-auto h-auto pl-2"
                   onClick={toggleDrawer}
                 >
                   About
