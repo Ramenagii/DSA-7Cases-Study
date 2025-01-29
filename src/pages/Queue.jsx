@@ -9,7 +9,7 @@ const GarageQueue = () => {
   const [input, setInput] = useState("");
   const [error, setError] = useState("");
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [counts, setCounts] = useState({}); // Added counts state
+  const [cctvLog, setCctvLog] = useState({});
   const [logIndex, setLogIndex] = useState(1);
 
   const carTypes = {
@@ -46,7 +46,7 @@ const GarageQueue = () => {
     }
     const carType = getRandomCarType();
     setQueue([...queue, { plate: input, type: carType, image: carTypes[carType] }]);
-    setCounts((prev) => ({
+    setCctvLog((prev) => ({
       ...prev,
       [input]: {
         arrival: (prev[input]?.arrival || 0) + 1,
@@ -63,49 +63,47 @@ const GarageQueue = () => {
       setError("Enter a plate number to remove.");
       return;
     }
-
-    if (queue.length === 0) {
-      setError("Garage is empty. Cannot remove cars.");
+    const carIndex = queue.findIndex(car => car.plate === input);
+    if (carIndex === -1) {
+      setError("Car not found in the garage.");
       return;
     }
-
-    const index = queue.findIndex((car) => car.plate === input);
-
-    if (index === -1) {
-      setError("Plate number not found in the garage.");
-      return;
-    }
-
-    const carsToRemove = queue.slice(0, index + 1);
-    const remainingCars = queue.slice(index + 1);
-    const carsToReadd = carsToRemove.slice(0, -1); // Exclude the target car
-
-    // Update departure counts for all carsToRemove
-    carsToRemove.forEach((car) => {
-      setCounts((prev) => ({
-        ...prev,
-        [car.plate]: {
-          arrival: prev[car.plate]?.arrival || 0,
-          departure: (prev[car.plate]?.departure || 0) + 1
-        }
-      }));
+    const removedCars = queue.slice(0, carIndex + 1);
+    const remainingCars = queue.slice(carIndex + 1);
+    
+    setQueue(remainingCars);
+    setCctvLog((prev) => {
+      let updatedLog = { ...prev };
+      removedCars.forEach(car => {
+        updatedLog[car.plate] = {
+          ...updatedLog[car.plate],
+          departure: (updatedLog[car.plate]?.departure || 0) + 1,
+        };
+      });
+      return updatedLog;
     });
 
-    // Update arrival counts for carsToReadd
-    carsToReadd.forEach((car) => {
-      setCounts((prev) => ({
-        ...prev,
-        [car.plate]: {
-          arrival: (prev[car.plate]?.arrival || 0) + 1,
-          departure: prev[car.plate]?.departure || 0
-        }
-      }));
-    });
+    setTimeout(() => {
+      setQueue(prev => {
+        const updatedCars = [...prev, ...removedCars.slice(0, removedCars.length - 1)]
+          .map(car => ({ ...car, returning: true }));
+        
+        setCctvLog((prev) => {
+          let updatedLog = { ...prev };
+          removedCars.slice(0, removedCars.length - 1).forEach(car => {
+            updatedLog[car.plate] = {
+              ...updatedLog[car.plate],
+              arrival: (updatedLog[car.plate]?.arrival || 0) + 1,
+            };
+          });
+          return updatedLog;
+        });
 
-    // Set the new queue to remaining cars plus re-added cars at the end
-    setQueue([...remainingCars, ...carsToReadd]);
-    setInput("");
-    setError("");
+        return updatedCars;
+      });
+    }, 500);
+
+    setLogIndex(logIndex + 1);
   };
 
   return (
@@ -170,7 +168,7 @@ const GarageQueue = () => {
         <button className="text-lg font-semibold mb-2 flex items-center" onClick={() => setIsMenuOpen(!isMenuOpen)}>
           <GiHamburgerMenu className="mr-2" /> CCTV Log
         </button>
-        {isMenuOpen && <ul className="text-sm">{Object.entries(counts).map(([plate, log]) => (<li key={plate}>{plate} - Arrival: {log.arrival} Departure: {log.departure}</li>))}</ul>}
+        {isMenuOpen && <ul className="text-sm">{Object.entries(cctvLog).map(([plate, log]) => (<li key={plate}>{plate} - Arrival: {log.arrival} Departure: {log.departure}</li>))}</ul>}
       </div>
     </div>
   );
