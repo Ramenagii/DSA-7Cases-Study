@@ -142,8 +142,8 @@ const GarageQueue = () => {
 
       {error && <p className="text-red-500 mb-4">{error}</p>}
 
-      <div className="garage-container flex flex-row items-center">
-        <div className="garage-row flex flex-row gap-4">
+      <div className="queuegarage-container flex flex-row items-center">
+        <div className="queuegarage-row flex flex-row gap-4">
           <AnimatePresence>
             {queue.map((car) => (
               <motion.div
@@ -152,10 +152,10 @@ const GarageQueue = () => {
                 animate={{ x: 0, opacity: 1 }}
                 exit={{ x: -100, opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="garage-slot"
+                className="queuegarage-slot"
               >
-                <div className="car">
-                  <img src={car.image} alt="Car" className="car-image" />
+                <div className="queuecar">
+                  <img src={car.image} alt="Car" className="queuecar-image" />
                   <p>{car.plate}</p>
                 </div>
               </motion.div>

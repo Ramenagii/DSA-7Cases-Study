@@ -159,8 +159,8 @@ const GarageStack = () => {
 
       {error && <p className="text-red-500 mb-4">{error}</p>}
       
-      <div className="garage-container">
-        <div className="garage-column">
+      <div className="stackgarage-container">
+        <div className="stackgarage-column">
           <AnimatePresence>
             {stack.map((car, i) => (
               <motion.div
@@ -169,10 +169,10 @@ const GarageStack = () => {
                 animate={{ y: 0, opacity: 1 }}
                 exit={{ y: -100, opacity: 0 }}
                 transition={{ duration: 0.5 }}
-                className="garage-slot"
+                className="stackgarage-slot"
               >
-                <div className="car">
-                <img src={car.image} alt="Car" className="car-image" />
+                <div className="stackcar">
+                <img src={car.image} alt="Car" className="stackcar-image" />
                   <p>{car.plate}</p>
                 </div>
               </motion.div>

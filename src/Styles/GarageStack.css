@@ -7,7 +7,7 @@
   }
   
   /* Garage Vertical Structure */
-  .garage-container {
+  .stackgarage-container {
     width: 200px;
     height: 500px;
     display: flex;
@@ -21,7 +21,7 @@
   }
   
   /* Garage Column */
-  .garage-column {
+  .stackgarage-column {
     display: flex;
     flex-direction: column-reverse;
     gap: 10px;
@@ -29,7 +29,7 @@
   }
   
   /* Garage Slots */
-  .garage-slot {
+  .stackgarage-slot {
     width: 150px;
     height: 50px;
     border: 2px dashed rgba(255, 255, 255, 0.5);
@@ -42,7 +42,7 @@
   }
   
   /* Car Styling */
-  .car {
+  .stackcar {
     width: 100%;
     height: 100%;
     display: flex;
