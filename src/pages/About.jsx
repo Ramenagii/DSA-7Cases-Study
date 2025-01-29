@@ -1,34 +1,34 @@
 import React from "react";
 import { motion } from "framer-motion";
-import Sidebar from '../components/sidebar';
+import Sidebar from '../Components/sidebar';
 
 const Home = () => {
   const team = [
     { 
       name: "Shoti", 
       role: "Front/Back-end", 
-      img: "/Images/Shoti.jpg",
+      img: "/src/assets/images/team/shoti.jpg", 
       contribution: "Developed the main navigation system and backend APIs.",
       fbLink: "https://www.facebook.com/john.justin.r.lorenzo"  
     },
     { 
       name: "Rohann", 
       role: "Front/Back-end", 
-      img: "/Images/Rohann.jpg",
+      img: "/src/assets/images/team/rohann.jpg", 
       contribution: "Created responsive UI components and implemented database models.",
       fbLink: "https://www.facebook.com/MarcGiant1"
     },
     { 
       name: "Mikko", 
       role: "Front/Back-end", 
-      img: "/Images/Mikko.jpg",
+      img: "/src/assets/images/team/jams.jpg", 
       contribution: "Designed and coded the interactive animations and state management.",
       fbLink: "https://www.facebook.com/jamesmikko.recario" 
     },
     { 
       name: "Shai", 
       role: "Front/Back-end", 
-      img: "/Images/Shai.jpg",
+      img: "/src/assets/images/team/shai.jpg", 
       contribution: "Tested and debugged the application for performance optimization.",
       fbLink: "https://www.facebook.com/shaifrederick.base.39" 
     },
@@ -39,9 +39,9 @@ const Home = () => {
   };
 
   return (
-    // ABout Page
+    // About Page
     <div className="flex flex-col items-center justify-center min-h-screen bg-white text-black w-full">
-            <Sidebar />
+      <Sidebar />
       <div className="min-h-screen bg-grey-400 text-gray-900 flex flex-col items-center justify-center">
         <motion.h1
           className="text-4xl font-bold mb-8 text-center text-black"
