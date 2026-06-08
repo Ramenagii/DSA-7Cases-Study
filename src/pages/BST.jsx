@@ -2,6 +2,29 @@ import { useEffect, useRef, useState } from "react";
 import * as d3 from "d3";
 import Sidebar from "../Components/sidebar.jsx";
 
+class TreeNode {
+  constructor(value) {
+    this.value = value;
+    this.left = null;
+    this.right = null;
+  }
+}
+
+const insert = (node, value) => {
+  if (!node) return new TreeNode(value);
+  if (value < node.value) node.left = insert(node.left, value);
+  else node.right = insert(node.right, value);
+  return node;
+};
+
+const createBinarySearchTree = (values) => {
+  let root = null;
+  values.forEach((value) => {
+    root = insert(root, value);
+  });
+  return root;
+};
+
 const BinarySearchTree = () => {
   const svgRef = useRef();
   const [values, setValues] = useState("");
@@ -9,29 +32,6 @@ const BinarySearchTree = () => {
   const [traversalResult, setTraversalResult] = useState("");
   const [isTraversing, setIsTraversing] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
-  class TreeNode {
-    constructor(value) {
-      this.value = value;
-      this.left = null;
-      this.right = null;
-    }
-  }
-
-  const insert = (node, value) => {
-    if (!node) return new TreeNode(value);
-    if (value < node.value) node.left = insert(node.left, value);
-    else node.right = insert(node.right, value);
-    return node;
-  };
-
-  const createBinarySearchTree = (values) => {
-    let root = null;
-    values.forEach((value) => {
-      root = insert(root, value);
-    });
-    return root;
-  };
 
   useEffect(() => {
     if (!values || isTraversing) return;

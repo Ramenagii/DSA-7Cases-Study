@@ -22,7 +22,7 @@ const TowerOfHanoi = () => {
     const isComplete = towers[2].length === disks;
     setIsSolved(isComplete);
     setExceededMoves(moves > minMoves);
-  }, [towers, moves, disks]);
+  }, [towers, moves, disks, minMoves]);
 
   // Timer effect
   useEffect(() => {

@@ -1,28 +1,28 @@
-import { useState, useEffect } from 'react';
+import { useState } from 'react';
 import { motion } from 'framer-motion';
 import Sidebar from '../Components/sidebar';
 
+const DEFAULT_ARRAY_SIZE = 10;
+
+const createRandomArray = (size) =>
+    Array.from({ length: size }, () => Math.floor(Math.random() * 50) + 1);
+
 const SortingVisualizer = () => {
-    const [array, setArray] = useState([]);
+    const [array, setArray] = useState(() => createRandomArray(DEFAULT_ARRAY_SIZE));
     const [delay, setDelay] = useState(300);
     const [activeIndex, setActiveIndex] = useState(null);
     const [isSorting, setIsSorting] = useState(false);
     const [notification, setNotification] = useState("");
     const [isSorted, setIsSorted] = useState(false);
     const [sortMethod, setSortMethod] = useState("insertion");
-    const [arraySize, setArraySize] = useState(10);
+    const [arraySize, setArraySize] = useState(DEFAULT_ARRAY_SIZE);
     const [sortDuration, setSortDuration] = useState(null);
     const [sortedIndices, setSortedIndices] = useState([]);
-
-    useEffect(() => {
-        generateRandomArray(arraySize);
-    }, []);
 
     // Generate a random array of given size
     const generateRandomArray = (size) => {
         if (isSorting) return;
-        const newArray = Array.from({ length: size }, () => Math.floor(Math.random() * 50) + 1);
-        setArray(newArray);
+        setArray(createRandomArray(size));
         setIsSorted(false);
         setSortDuration(null);
     };
