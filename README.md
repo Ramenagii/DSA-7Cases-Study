@@ -2,6 +2,8 @@
 
 Interactive React/Vite coursework app for explaining data structures, algorithms, and small logic games through visual demos.
 
+![DSA 7 Cases Study screenshot](./docs/screenshot.png)
+
 ## Included Cases
 
 - Stack simulation
@@ -34,6 +36,10 @@ npm run dev
 npm run lint
 npm run build
 ```
+
+## Quality Gate
+
+GitHub Actions runs install, audit, lint, and production build checks on pushes and pull requests.
 
 ## Project Notes
 
