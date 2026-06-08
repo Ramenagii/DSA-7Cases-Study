@@ -1,8 +1,11 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Sidebar from "../Components/sidebar";
 import "../Styles/GarageStack.css";
+import helicopter1 from "../assets/images/flying-vehicles/helicopter1.png";
+import jet1 from "../assets/images/flying-vehicles/jet1.png";
+import ufo1 from "../assets/images/flying-vehicles/ufo1.png";
 
 const GarageStack = () => {
   const [stack, setStack] = useState([]);
@@ -14,9 +17,9 @@ const GarageStack = () => {
   const [logIndex, setLogIndex] = useState(1);
 
   const carTypes = {
-    helicopter: "/src/assets/images/flying-vehicles/helicopter1.png",  // Replace with the correct car image URL
-    jet: "/src/assets/images/flying-vehicles/jet1.png",    // Replace with the correct car image URL
-    ufo: "/src/assets/images/flying-vehicles/ufo1.png",  // Replace with the correct car image URL
+    helicopter: helicopter1,
+    jet: jet1,
+    ufo: ufo1,
   };
 
   const getRandomCarType = () => {
@@ -162,7 +165,7 @@ const GarageStack = () => {
       <div className="stackgarage-container">
         <div className="stackgarage-column">
           <AnimatePresence>
-            {stack.map((car, i) => (
+            {stack.map((car) => (
               <motion.div
                 key={car.plate}
                 initial={{ y: -100, opacity: 0 }}

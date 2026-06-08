@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion } from "framer-motion";
 import "../Styles/tictactoe.css";
 import Sidebar from "../Components/sidebar";

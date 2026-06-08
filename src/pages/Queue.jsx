@@ -1,8 +1,19 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { GiHamburgerMenu } from "react-icons/gi";
 import Sidebar from "../Components/sidebar";
 import "../Styles/GarageQueue.css";
+import car1 from "../assets/images/Cars/car1.png";
+import car2 from "../assets/images/Cars/car2.png";
+import car3 from "../assets/images/Cars/car3.png";
+import car4 from "../assets/images/Cars/car4.png";
+import car5 from "../assets/images/Cars/car5.png";
+import car6 from "../assets/images/Cars/car6.png";
+import car7 from "../assets/images/Cars/car7.png";
+import car8 from "../assets/images/Cars/car8.png";
+import car9 from "../assets/images/Cars/car9.png";
+import car10 from "../assets/images/Cars/car10.png";
+import car11 from "../assets/images/Cars/car11.png";
 
 const GarageQueue = () => {
   const [queue, setQueue] = useState([]);
@@ -13,17 +24,17 @@ const GarageQueue = () => {
   const [logIndex, setLogIndex] = useState(1);
 
   const carTypes = {
-    sedan: "/src/assets/images/cars/car1.png",
-    truck: "/src/assets/images/cars/car2.png",
-    van: "/src/assets/images/cars/car3.png",
-    broom: "/src/assets/images/cars/car4.png",
-    vroom: "/src/assets/images/cars/car5.png",
-    zoom: "/src/assets/images/cars/car6.png",
-    taxi: "/src/assets/images/cars/car7.png",
-    bus: "/src/assets/images/cars/car8.png",
-    jeep: "/src/assets/images/cars/car9.png",
-    bike: "/src/assets/images/cars/car10.png",  
-    ambulance: "/src/assets/images/cars/car11.png",
+    sedan: car1,
+    truck: car2,
+    van: car3,
+    broom: car4,
+    vroom: car5,
+    zoom: car6,
+    taxi: car7,
+    bus: car8,
+    jeep: car9,
+    bike: car10,
+    ambulance: car11,
   };
 
   const getRandomCarType = () => {

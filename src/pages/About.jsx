@@ -1,34 +1,37 @@
-import React from "react";
 import { motion } from "framer-motion";
 import Sidebar from '../Components/sidebar';
+import Shoti from "../assets/images/team/shoti.jpg";
+import Rohann from "../assets/images/team/rohann.jpg";
+import Jams from "../assets/images/team/jams.jpg";
+import Shai from "../assets/images/team/shai.jpg";
 
 const Home = () => {
   const team = [
     { 
       name: "Shoti", 
       role: "Front/Back-end", 
-      img: "/src/assets/images/team/shoti.jpg", 
+      img: Shoti,
       contribution: "Developed the main navigation system and backend APIs.",
       fbLink: "https://www.facebook.com/john.justin.r.lorenzo"  
     },
     { 
       name: "Rohann", 
       role: "Front/Back-end", 
-      img: "/src/assets/images/team/rohann.jpg", 
+      img: Rohann,
       contribution: "Created responsive UI components and implemented database models.",
       fbLink: "https://www.facebook.com/MarcGiant1"
     },
     { 
       name: "Mikko", 
       role: "Front/Back-end", 
-      img: "/src/assets/images/team/jams.jpg", 
+      img: Jams,
       contribution: "Designed and coded the interactive animations and state management.",
       fbLink: "https://www.facebook.com/jamesmikko.recario" 
     },
     { 
       name: "Shai", 
       role: "Front/Back-end", 
-      img: "/src/assets/images/team/shai.jpg", 
+      img: Shai,
       contribution: "Tested and debugged the application for performance optimization.",
       fbLink: "https://www.facebook.com/shaifrederick.base.39" 
     },
@@ -90,7 +93,7 @@ const Home = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 1, duration: 0.5 }}
         >
-          © 2024 Team Project. All Rights Reserved.
+          (c) 2024 Team Project. All Rights Reserved.
         </motion.footer>
       </div>
     </div>

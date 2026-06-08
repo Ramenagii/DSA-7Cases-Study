@@ -1,8 +1,40 @@
-# React + Vite
+# DSA 7 Cases Study
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Interactive React/Vite coursework app for explaining data structures, algorithms, and small logic games through visual demos.
 
-Currently, two official plugins are available:
+## Included Cases
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- Stack simulation
+- Queue simulation
+- Binary tree visualization
+- Binary search tree visualization
+- Sorting visualizer
+- Towers of Hanoi
+- Tic-tac-toe logic demo
+
+## Tech Stack
+
+- React
+- Vite
+- Tailwind CSS
+- Framer Motion
+- D3
+- Three.js
+
+## Run Locally
+
+```bash
+npm install
+npm run dev
+```
+
+## Build
+
+```bash
+npm run lint
+npm run build
+```
+
+## Project Notes
+
+The app includes media assets for the presentation-style landing page and interactive case screens. Keep large media compressed before committing so the repository stays practical to clone.

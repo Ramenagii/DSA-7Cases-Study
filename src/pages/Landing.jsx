@@ -1,6 +1,5 @@
-import React from "react";
 import { useNavigate } from "react-router-dom";
-import Plates from "../components/Plates.jsx";
+import Plates from "../Components/Plates.jsx";
 import videoSrc from "../assets/videos/hero-vid.mp4";
 import Jams from "../assets/images/team/jams.jpg";
 import Shai from "../assets/images/team/shai.jpg";
@@ -147,7 +146,7 @@ function Landing() {
           <div className="text-center mb-12">
             <h2 className="text-4xl font-bold">Get in Touch</h2>
             <p className="text-xl mt-4">
-              We'd love to hear from you! Reach out to us with any questions or
+              We would love to hear from you! Reach out to us with any questions or
               feedback.
             </p>
           </div>
