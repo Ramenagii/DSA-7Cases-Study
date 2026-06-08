@@ -1,5 +1,7 @@
 # DSA 7 Cases Study
 
+[![CI](https://github.com/Ramenagii/DSA-7Cases-Study/actions/workflows/ci.yml/badge.svg)](https://github.com/Ramenagii/DSA-7Cases-Study/actions/workflows/ci.yml)
+
 Interactive React/Vite coursework app for explaining data structures, algorithms, and small logic games through visual demos.
 
 ![DSA 7 Cases Study screenshot](./docs/screenshot.png)
